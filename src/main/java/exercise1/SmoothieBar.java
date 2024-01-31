@@ -69,4 +69,5 @@ public final class SmoothieBar {
     public int getBananasInStock() {
         return bananasInStock;
     }
+
 }

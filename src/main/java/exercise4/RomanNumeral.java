@@ -6,6 +6,7 @@ package exercise4;
  * You won't need this class until the last task in exercise 4
  */
 public class RomanNumeral {
+    //TODO: exercise 4
     final int value;
     final String symbol;
 

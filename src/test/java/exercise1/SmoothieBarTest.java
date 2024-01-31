@@ -1,16 +1,32 @@
 package exercise1;
 
 import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SmoothieBarTest {
-    //TODO: refactor repeated code into method... excercise 3
+    private SmoothieBar createSmoothieBar(int numOrange, int numApple, int numBanana) {
+        SmoothieBar smoothieBar = new SmoothieBar();
+
+        if (numOrange > 0) {
+            smoothieBar.restockOranges(numOrange);
+        }
+
+        if (numApple > 0) {
+            smoothieBar.restockApples(numApple);
+        }
+
+        if (numBanana > 0) {
+            smoothieBar.restockBananas(numBanana);
+        }
+
+        return smoothieBar;
+    }
+
     @Test
     public void canBlendOrangeAndAppleSmoothie() {
         // Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockApples(2);
-        smoothieBar.restockOranges(2);
+        SmoothieBar smoothieBar = createSmoothieBar(2, 2, 0);
 
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.OrangeAndAppleSmoothie);
@@ -22,9 +38,7 @@ public class SmoothieBarTest {
     @Test
     public void blendingOrangeAndAppleSmoothieConsumesOrangesAndApples() {
         // Then
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockApples(2);
-        smoothieBar.restockOranges(2);
+        SmoothieBar smoothieBar = createSmoothieBar(2, 2, 0);
 
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.OrangeAndAppleSmoothie);
@@ -37,9 +51,7 @@ public class SmoothieBarTest {
     @Test
     public void canBlendBananaAndAppleSmoothie() {
         // Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockApples(2);
-        smoothieBar.restockBananas(1);
+        SmoothieBar smoothieBar = createSmoothieBar(0, 2, 1);
 
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.BananaAndAppleSmoothie);
@@ -51,9 +63,7 @@ public class SmoothieBarTest {
     @Test
     public void blendingBananaAndAppleSmoothieConsumesBananasAndApples() {
         //Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockApples(2);
-        smoothieBar.restockBananas(1);
+        SmoothieBar smoothieBar = createSmoothieBar(0, 2, 1);
 
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.BananaAndAppleSmoothie);
@@ -66,10 +76,7 @@ public class SmoothieBarTest {
     @Test
     public void canBlendOrangeAndBananaSmoothie() {
         // Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockOranges(3);
-        smoothieBar.restockBananas(1);
-
+        SmoothieBar smoothieBar = createSmoothieBar(3, 0, 1);
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.OrangeAndBananaSmoothie);
 
@@ -80,9 +87,7 @@ public class SmoothieBarTest {
     @Test
     public void blendingOrangeAndBananaSmoothieConsumesOrangeAndBananas() {
         // Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockOranges(3);
-        smoothieBar.restockBananas(1);
+        SmoothieBar smoothieBar = createSmoothieBar(3, 0, 1);
 
         // When
         Smoothie smoothie = smoothieBar.blend(SmoothieKind.OrangeAndBananaSmoothie);
@@ -95,9 +100,7 @@ public class SmoothieBarTest {
     @Test
     public void smoothieBarIllegalStateCheck() {
         // Given
-        SmoothieBar smoothieBar = new SmoothieBar();
-        smoothieBar.restockApples(2);
-        smoothieBar.restockOranges(1);
+        SmoothieBar smoothieBar = createSmoothieBar(1, 2, 0);
 
         // When and Then
         assertThrows(IllegalStateException.class, () -> {
